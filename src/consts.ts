@@ -1,6 +1,7 @@
 // サイト全体で使う定数
 export const SITE_TITLE = 'moritalous Blog';
-export const SITE_DESCRIPTION = 'Astro で構築した技術ブログ';
+export const SITE_DESCRIPTION =
+  'Astro の動作確認のために作成したテストサイトです。';
 
 // ヘッダーのナビゲーション項目
 export const NAV_LINKS = [
