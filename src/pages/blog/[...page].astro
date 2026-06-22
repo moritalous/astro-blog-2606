@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+  return paginate(posts, { pageSize: 5 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: Page<CollectionEntry<'blog'>> };
+---
+
+<BaseLayout title="Blog">
+  <h1 class="mb-4 text-3xl font-bold tracking-tight">Blog</h1>
+
+  {page.data.map((post) => <PostCard post={post} />)}
+
+  <nav class="mt-8 flex items-center justify-between text-sm">
+    {
+      page.url.prev ? (
+        <a
+          href={page.url.prev}
+          class="text-blue-600 hover:underline dark:text-blue-400"
+        >
+          ← 新しい記事
+        </a>
+      ) : (
+        <span />
+      )
+    }
+    <span class="text-gray-500 dark:text-gray-400">
+      {page.currentPage} / {page.lastPage}
+    </span>
+    {
+      page.url.next ? (
+        <a
+          href={page.url.next}
+          class="text-blue-600 hover:underline dark:text-blue-400"
+        >
+          古い記事 →
+        </a>
+      ) : (
+        <span />
+      )
+    }
+  </nav>
+</BaseLayout>

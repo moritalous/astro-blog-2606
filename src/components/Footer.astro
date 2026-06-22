@@ -1,0 +1,20 @@
+---
+import { SITE_TITLE } from '../consts';
+import { withBase } from '../lib/path';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-16 border-t border-gray-200 dark:border-gray-800">
+  <div
+    class="mx-auto flex max-w-3xl flex-col items-center justify-between gap-2 px-4 py-6 text-sm text-gray-500 sm:flex-row dark:text-gray-400"
+  >
+    <p>&copy; {year} {SITE_TITLE}</p>
+    <a
+      href={withBase('rss.xml')}
+      class="hover:text-blue-600 dark:hover:text-blue-400"
+    >
+      RSS
+    </a>
+  </div>
+</footer>
