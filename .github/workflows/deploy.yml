@@ -1,9 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
-  # mainブランチへのpush時にデプロイ
+  # デフォルトブランチへのpush時にデプロイ
   push:
-    branches: [main]
+    branches: [claude/astro-7-gh-pages-6mv707]
   # Actionsタブから手動実行も可能
   workflow_dispatch:
 
